@@ -1,0 +1,23 @@
+{
+  "name": "100daysofjs",
+  "version": "1.0.0",
+  "description": "Started this coding challenge to see how my developement over 100 days.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeorgiVarbanov/100DaysOfJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GeorgiVarbanov/100DaysOfJS/issues"
+  },
+  "homepage": "https://github.com/GeorgiVarbanov/100DaysOfJS#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
