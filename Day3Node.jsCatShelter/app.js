@@ -1,3 +1,5 @@
+//import { Cat } from "./components/catComponent/cat.js";
+
 const http = require("http");
 const fs = require("fs/promises");
 const PORT = 3000;
@@ -26,12 +28,13 @@ const cats = [
         name: 'Silvester',
         breed: 'British',
         description: 'A pretty cool and chill dude',
-    }
-]
+    }];
 
 
 const server = http.createServer(async (req, res) => {
     const { url } = req;
+    console.log(req.method);
+    console.log(url);
 
     if (url === "/") {
         const imageUrlPattern = /{{imageUrl}}/g;
@@ -40,41 +43,41 @@ const server = http.createServer(async (req, res) => {
         const descriptionPattern = /{{description}}/g;
 
         const homeHtml = await fs.readFile('./views/home/index.html', "utf-8");
-        const catTemplate = await fs.readFile(`./views/home/catTemplate.html`, `utf-8`);
+        const catTemplate = await fs.readFile(`./components/catComponent/catHtml.html`, `utf-8`);
 
         const catHtml = cats.map((cat) =>
             catTemplate
-            .replace(imageUrlPattern, cat.imageUrl)
-            .replace(namePattern, cat.name)
-            .replace(breedPattern, cat.breed)
-            .replace(descriptionPattern, cat.description)
-            .join("")
+                .replace(imageUrlPattern, cat.imageUrl)
+                .replace(namePattern, cat.name)
+                .replace(breedPattern, cat.breed)
+                .replace(descriptionPattern, cat.description)
         );
 
-const homeHtmlTemplate = homeHtml.replace("{{cats}}", catHtml)
+        const homeHtmlTemplate = homeHtml.replace("{{cats}}", catHtml)
 
-res.writeHead(200, { "Content-Type": "text/html" });
-res.write(homeHtmlTemplate);
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(homeHtmlTemplate);
     } else if (url === `/content/styles/site.css`) {
-    const siteCss = await fs.readFile(`./content/styles/site.css`, "utf-8")
-    res.writeHead(200, { "Content-Type": "text/css" });
-    res.write(siteCss);
-} else if (url === `/cats/add-breed`) {
-    const addBreadHtml = await fs.readFile(`./views/addBreed.html`, "utf-8");
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(addBreadHtml);
-} else if (url === `/cats/add-cat`) {
-    const addCatHtml = await fs.readFile(`./views/addCat.html`, "utf-8");
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(addCatHtml);
-} else if (url === `/cats/edit-cat`) {
+        const siteCss = await fs.readFile(`./content/styles/site.css`, "utf-8")
+        res.writeHead(200, { "Content-Type": "text/css" });
+        res.write(siteCss);
+    } else if (url === `/cats/add-breed`) {
+        const addBreadHtml = await fs.readFile(`./views/addBreed.html`, "utf-8");
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(addBreadHtml);
+    } else if (url === `/cats/add-cat`) {
+        const addCatHtml = await fs.readFile(`./views/addCat.html`, "utf-8");
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(addCatHtml);
+    } else if (url === `/cats/edit-cat`) {
 
-    const editCat = await fs.readFile(`./views/editCat.html`, "utf-8");
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(editCat);
-}
-
-res.end();
+        const editCat = await fs.readFile(`./views/editCat.html`, "utf-8");
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(editCat);
+    } else if (req.method === 'POST'){
+        server.listen(PORT, () => {console.log("Here")});
+    }
+    res.end();
 });
 
 
