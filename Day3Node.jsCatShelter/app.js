@@ -33,8 +33,6 @@ const cats = [
 
 const server = http.createServer(async (req, res) => {
     const { url } = req;
-    console.log(req.method);
-    console.log(url);
 
     if (url === "/") {
         const imageUrlPattern = /{{imageUrl}}/g;
@@ -69,13 +67,37 @@ const server = http.createServer(async (req, res) => {
         const addCatHtml = await fs.readFile(`./views/addCat.html`, "utf-8");
         res.writeHead(200, { "Content-Type": "text/html" });
         res.write(addCatHtml);
+
+        if (req.method === "POST") {
+            let body = "";
+
+            req.on('data', chunk => {
+                body +=chunk;
+            });
+
+            req.on('end', () => {
+                console.log(body.trim());
+                const pattern = /\s*([a-zA-z]*)\s/g;
+                const newData = body.match(pattern);
+
+                const currentCat = {
+                    imageUrl: "",
+                    name:newData[4].trim(),
+                    breed:newData[7] + " " + newData[8],
+                    description:newData[10].trim(),
+                }
+
+                console.log(currentCat);
+                console.log(newData)
+            });
+        }
+
     } else if (url === `/cats/edit-cat`) {
 
         const editCat = await fs.readFile(`./views/editCat.html`, "utf-8");
         res.writeHead(200, { "Content-Type": "text/html" });
         res.write(editCat);
-    } else if (req.method === 'POST'){
-        server.listen(PORT, () => {console.log("Here")});
+    } else if (url === `/random`) {
     }
     res.end();
 });
