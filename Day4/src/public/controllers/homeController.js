@@ -8,7 +8,7 @@ rounter.get("/about", (req, res) => {
     res.render('about');
 });
 
-rounter.get("*", (req, res) => {
+rounter.get("/404", (req, res) => {
     res.render('404');
 })
 
