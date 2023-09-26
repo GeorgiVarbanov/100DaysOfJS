@@ -1,15 +1,18 @@
-const rounter = require('express').Router();
+const rounter = require("express").Router();
+const cubeService = require("../../services/cubeService");
 
 rounter.get("/", (req, res) => {
-    res.render('index');
+  const cubes = cubeService.getAll();
+  console.log(cubes);
+  res.render("index", { cubes });
 });
 
 rounter.get("/about", (req, res) => {
-    res.render('about');
+  res.render("about");
 });
 
 rounter.get("/404", (req, res) => {
-    res.render('404');
-})
+  res.render("404");
+});
 
 module.exports = rounter;
