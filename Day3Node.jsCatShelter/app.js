@@ -72,7 +72,8 @@ const server = http.createServer(async (req, res) => {
             let body = "";
 
             req.on('data', chunk => {
-                body +=chunk;
+                
+                body += chunk;
             });
 
             req.on('end', () => {
@@ -82,9 +83,9 @@ const server = http.createServer(async (req, res) => {
 
                 const currentCat = {
                     imageUrl: "",
-                    name:newData[4].trim(),
-                    breed:newData[7] + " " + newData[8],
-                    description:newData[10].trim(),
+                    //name:newData[4].trim(),
+                    //breed:newData[7] + " " + newData[8],
+                    //description:newData[10].trim(),
                 }
 
                 console.log(currentCat);
