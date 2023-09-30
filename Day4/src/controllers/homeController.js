@@ -1,9 +1,8 @@
 const rounter = require("express").Router();
 const cubeService = require("../services/cubeService.js");
 
-rounter.get("/", (req, res) => {
-  const cubes = cubeService.getAll();
-  console.log(cubes);
+rounter.get("/", async (req, res) => {
+  const cubes =  await cubeService.getAll();
   res.render("index", { cubes });
 });
 
