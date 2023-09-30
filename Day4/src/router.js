@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const homeController = require("./public/controllers/homeController");
-const cubeController = require("./public/controllers/cubeController");
+const homeController = require("./controllers/homeController.js");
+const cubeController = require("./controllers/cubeController");
 
 router.use(homeController);
 router.use("/cubes", cubeController);

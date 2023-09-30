@@ -1,9 +1,9 @@
 const rounter = require("express").Router();
-const cubeService = require("../../services/cubeService");
+const cubeService = require("../services/cubeService");
 
 rounter.get("/create", (req, res) => {
   cubeService.getAll();
-  res.render("create");
+  res.render("cube/create");
 });
 
 rounter.post("/create", (req, res) => {
@@ -20,7 +20,7 @@ rounter.post("/create", (req, res) => {
 rounter.get("/details/:cubeId", (req, res) => {
   const { cubeId } = req.params;
   const cube = cubeService.getById(cubeId);
-  res.render("details", { cube });
+  res.render("cube/details", { cube });
 });
 
 module.exports = rounter;
