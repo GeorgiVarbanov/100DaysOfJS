@@ -13,7 +13,7 @@ exports.getAll = async () => {
 };
 
 exports.getById = (id) => {
-  return Cube.findById(id);
+  return Cube.findById(id).populate("accessories");
 };
 
 exports.attachAccessory = async (cubeId, accessoryId) => {

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const cubeService = require("../services/cubeService");
-const { getAllAccessories } = require("../services/accessoryService.js");
+const accessoryController = require("../services/accessoryService.js");
 
 router.get("/create", async (req, res) => {
   await cubeService.getAll();
@@ -21,22 +21,30 @@ router.post("/create", async (req, res) => {
 router.get("/details/:cubeId", async (req, res) => {
   const { cubeId } = req.params;
   const cube = await cubeService.getById(cubeId).lean();
-  const accessories = await getAllAccessories();
-  res.render("cube/details", { cube , accessories});
+  const hasAccessories =  
+  cube.accessories === undefined ? false : cube.accessories.length > 0;
+
+  res.render("cube/details", { cube , hasAccessories});
 });
 
 router.get("/:cubeId/attach-accessory", async (req, res) => {
   const {cubeId} = req.params;
   const cube = await cubeService.getById(cubeId).lean();
-  const accessories = await getAllAccessories();
-  const hasAccessories = accessories.length > 0;
+  const accessoryIds = cube.accessories ? cube.accessories.map((a) => a._id) : [];
+
+  console.log(accessoryIds);
+
+  const accessories = await accessoryController.getWithoutOwned(accessoryIds);
+
+  const hasAccessories = accessories.length > 0 ;
 
   res.render("accessory/attach", {cube, accessories, hasAccessories});
 });
 
-router.post("/:cubeId/attach-accessory", (req, res) => {
+router.post("/:cubeId/attach-accessory", async (req, res) => {
   const {cubeId} = req.params;
   const {accessory: accessoryId} = req.body;
+  await cubeService.attachAccessory(cubeId, accessoryId);
 
   res.redirect(`/cubes/details/${cubeId}`);
 });

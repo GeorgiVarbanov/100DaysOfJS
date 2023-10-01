@@ -9,9 +9,12 @@
   </div>
   <h2>Accessories</h2>
   <div class="accessories">
-    {{#each accessories}}
-     {{>accessoryTemplate}}
-    {{/each}}
+    {{#if hasAccessories}}
+      {{#each cube.accessories}}
+        {{>accessoryTemplate}}
+      {{/each}}
+    {{else}}
     <h3 class="italic">This cube has no accessories yet...</h3>
+    {{/if}}
   </div>
 </main>
