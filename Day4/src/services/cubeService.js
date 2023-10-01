@@ -15,3 +15,9 @@ exports.getAll = async () => {
 exports.getById = (id) => {
   return Cube.findById(id);
 };
+
+exports.attachAccessory = async (cubeId, accessoryId) => {
+  const cube = await this.getById(cubeId);
+  cube.accessories.push(accessoryId);
+  return cube.save()
+}

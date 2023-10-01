@@ -26,12 +26,19 @@ router.get("/details/:cubeId", async (req, res) => {
 });
 
 router.get("/:cubeId/attach-accessory", async (req, res) => {
-  const {cubeId} =req.params;
+  const {cubeId} = req.params;
   const cube = await cubeService.getById(cubeId).lean();
   const accessories = await getAllAccessories();
   const hasAccessories = accessories.length > 0;
 
   res.render("accessory/attach", {cube, accessories, hasAccessories});
-})
+});
+
+router.post("/:cubeId/attach-accessory", (req, res) => {
+  const {cubeId} = req.params;
+  const {accessory: accessoryId} = req.body;
+
+  res.redirect(`/cubes/details/${cubeId}`);
+});
 
 module.exports = router;
