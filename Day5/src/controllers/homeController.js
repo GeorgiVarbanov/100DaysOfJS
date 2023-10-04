@@ -1,7 +1,9 @@
 const router = require("express").Router();
+const catService = require("../services/catService.js")
+const dogService = require("../services/dogService.js")
 
-router.get("/animals/add-breed", (req, res) => {
-    res.render("breeds/addBreed");
+router.get("/", (req , res) => {
+    res.render("index");
 });
 
 router.get("/cats/add-cat", (req, res) => {

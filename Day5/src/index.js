@@ -3,16 +3,17 @@ const router = require("./router.js");
 
 const expressConfig = require("./config/expressConfig.js");
 const handlebarsConfig = require("./config/hbsConfig");
+const dbConnect = require("./config/dbConfig.js");
 
 const app = express();
 const { PORT } = require("./constants.js");
 
+dbConnect()
+.then(() => console.log(`Succesful connection to DB`))
+.catch(err => console.log(`Error while connecting to DB ${err}`));
+
 expressConfig(app);
 handlebarsConfig(app);
-
-app.get("/", (req , res) => {
-    res.render("index");
-});
 
 app.use(router);
 
