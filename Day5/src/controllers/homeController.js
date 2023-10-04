@@ -2,7 +2,9 @@ const router = require("express").Router();
 const catService = require("../services/catService.js")
 const dogService = require("../services/dogService.js")
 
-router.get("/", (req , res) => {
+router.get("/", async (req , res) => {
+    const cats = await catService.getAll();
+    const dogs = await dogService.getAll();
     res.render("index");
 });
 
