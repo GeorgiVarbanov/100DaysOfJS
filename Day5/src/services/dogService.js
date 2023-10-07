@@ -1,15 +1,17 @@
-const Dog = require("../models/Cat.js");
+const Dog = require("../models/Dog.js");
 
 
-exports.createDog = async (catData) => {
-    const cat = Dog.create(catData);
-    return cat;
+exports.createDog = async (dogData) => {
+    const dog = Dog.create(dogData);
+    return dog;
 };
 
 exports.getAll = async () => {
-    const cats = await Dog.find().lean();
+    const dog = await Dog.find().lean();
+    return dog;
 }
 
-exports.getDogById = async (catId) => {
-    const cat = await Dog.findById(catId);
+exports.getDogById = async (dogId) => {
+    const dog = await Dog.findById(dogId);
+    return dog;
 }

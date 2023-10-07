@@ -8,8 +8,10 @@ exports.createCat = async (catData) => {
 
 exports.getAll = async () => {
     const cats = await Cat.find().lean();
+    return cats;
 }
 
 exports.getCatById = async (catId) => {
     const cat = await Cat.findById(catId);
+    return cat;
 }
