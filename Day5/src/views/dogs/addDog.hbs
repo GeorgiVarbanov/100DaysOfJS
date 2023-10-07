@@ -1,12 +1,12 @@
 <main>
-    <form action="/cats/add-cat" method="post" class="cat-form" enctype="multipart/form-data">
+    <form method="POST" class="cat-form">
         <h2>Add Dog</h2>
         <label for="name">Name</label>
         <input name="name" type="text" id="name">
         <label for="description">Description</label>
         <textarea name="description" id="description"></textarea>
-        <label for="image">Image</label>
-        <input name="imageUrl" type="text" id="image">
+        <label for="image">ImageUrl</label>
+        <input type="text" id="image" name="imageUrl">
         <label for="group">Breed</label>
         <select name="breed" id="group">
             <option value="Russian Blue">Russian Blue</option>

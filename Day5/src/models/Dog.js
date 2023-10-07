@@ -7,6 +7,6 @@ const dogSchema = new mongoose.Schema({
     breed: String,
 });
 
-const Dog = mongoose.model("Cat", dogSchema);
+const Dog = mongoose.model("Dog", dogSchema);
 
 module.exports = Dog;
