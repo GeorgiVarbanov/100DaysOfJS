@@ -1,5 +1,10 @@
 const Breed = require("../models/Breed.js");
 
+exports.createBreed = async (breedData) => {
+    const breed = Breed.create(breedData);
+    return breed;
+}
+
 
 exports.catBreeds = async (breeds) => {
     const filteredCatBreeds = breeds.filter();
