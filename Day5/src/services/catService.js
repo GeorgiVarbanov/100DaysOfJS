@@ -12,6 +12,6 @@ exports.getAll = async () => {
 }
 
 exports.getCatById = async (catId) => {
-    const cat = await Cat.findById(catId);
+    const cat = await Cat.findById(catId).lean();
     return cat;
 }

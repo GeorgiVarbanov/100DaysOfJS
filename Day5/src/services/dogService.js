@@ -12,6 +12,6 @@ exports.getAll = async () => {
 }
 
 exports.getDogById = async (dogId) => {
-    const dog = await Dog.findById(dogId);
+    const dog = await Dog.findById(dogId).lean();
     return dog;
 }
