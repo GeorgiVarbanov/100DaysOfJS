@@ -6,17 +6,17 @@ exports.createBreed = async (breedData) => {
 }
 
 
-exports.catBreeds = async (breeds) => {
-    const filteredCatBreeds = breeds.filter();
-    // TO DO: 
-}
-
-exports.dogBreeds = async (breeds) => {
-    const filteredDogBreeds = breeds.filter();
-    // TO DO: 
-}
-
-
-const getAll = async () => {
+exports.catBreeds = async () => {
     const breeds = await Breed.find().lean();
+    const filteredBreeds = breeds
+    .filter((breed) => breed.type === "Cat")
+    return filteredBreeds;
 }
+
+exports.dogBreeds = async () => {
+    const breeds = await Breed.find().lean();
+    const filteredBreeds = breeds
+    .filter((breed) => breed.type === "Dog")
+    return filteredBreeds;
+}
+

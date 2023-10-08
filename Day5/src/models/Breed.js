@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const breedSchema = new mongoose.Schema({
-    breedName: String,
+    breed: String,
     type: String,
 });
 
