@@ -9,6 +9,12 @@ router.get("/register", async (req , res) => {
     res.render("user/register");
 });
 
+router.post("/register", async (req, res) => {
+    const {username , password , repeatPassword} = req.body;
+    const user = userService.register(username, password, repeatPassword);
+    res.render("/users/login");
+});
+
 
 
 
