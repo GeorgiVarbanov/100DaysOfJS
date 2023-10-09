@@ -5,13 +5,19 @@ router.get("/login", async (req, res) => {
     res.render("user/login");
 });
 
-router.get("/register", async (req , res) => {
+router.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+    await userService.login({ username, password });
+    res.redirect("/");
+});
+
+router.get("/register", async (req, res) => {
     res.render("user/register");
 });
 
 router.post("/register", async (req, res) => {
-    const {username , password , repeatPassword} = req.body;
-    await userService.register({username, password, repeatPassword});
+    const { username, password, repeatPassword } = req.body;
+    await userService.register({ username, password, repeatPassword });
     res.redirect("/users/login");
 });
 
