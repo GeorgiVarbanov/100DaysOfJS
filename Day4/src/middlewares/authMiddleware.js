@@ -9,6 +9,7 @@ exports.auth = async (req, res, next) => {
         try {
             const decodedToken = await jwt.verify(token, SECRET);
             req.user = decodedToken;
+            next();
         } catch (error) {
             console.log({ error });
             res.cookieClear("auth");
@@ -19,4 +20,6 @@ exports.auth = async (req, res, next) => {
     }
 };
 
-exports.authorise
+exports.authorise = async (req,res,next) => {
+
+};

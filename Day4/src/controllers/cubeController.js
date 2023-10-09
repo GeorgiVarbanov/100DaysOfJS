@@ -9,11 +9,13 @@ router.get("/create", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   const { name, description, imageUrl, difficultyLevel } = req.body;
+
   await cubeService.createCube({
     name,
     description,
     imageUrl,
     difficultyLevel: Number(difficultyLevel),
+    owner: req.user,
   });
   res.redirect("/");
 });
@@ -21,14 +23,14 @@ router.post("/create", async (req, res) => {
 router.get("/details/:cubeId", async (req, res) => {
   const { cubeId } = req.params;
   const cube = await cubeService.getById(cubeId).lean();
-  const hasAccessories =  
-  cube.accessories === undefined ? false : cube.accessories.length > 0;
+  const hasAccessories =
+    cube.accessories === undefined ? false : cube.accessories.length > 0;
 
-  res.render("cube/details", { cube , hasAccessories});
+  res.render("cube/details", { cube, hasAccessories });
 });
 
 router.get("/:cubeId/attach-accessory", async (req, res) => {
-  const {cubeId} = req.params;
+  const { cubeId } = req.params;
   const cube = await cubeService.getById(cubeId).lean();
   const accessoryIds = cube.accessories ? cube.accessories.map((a) => a._id) : [];
 
@@ -36,14 +38,14 @@ router.get("/:cubeId/attach-accessory", async (req, res) => {
 
   const accessories = await accessoryController.getWithoutOwned(accessoryIds);
 
-  const hasAccessories = accessories.length > 0 ;
+  const hasAccessories = accessories.length > 0;
 
-  res.render("accessory/attach", {cube, accessories, hasAccessories});
+  res.render("accessory/attach", { cube, accessories, hasAccessories });
 });
 
 router.post("/:cubeId/attach-accessory", async (req, res) => {
-  const {cubeId} = req.params;
-  const {accessory: accessoryId} = req.body;
+  const { cubeId } = req.params;
+  const { accessory: accessoryId } = req.body;
   await cubeService.attachAccessory(cubeId, accessoryId);
 
   res.redirect(`/cubes/details/${cubeId}`);
