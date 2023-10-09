@@ -1,4 +1,3 @@
-const uniqid = require("uniqid");
 const Cube = require("../models/Cube.js");
 const { search } = require("../router.js");
 
