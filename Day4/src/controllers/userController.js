@@ -11,7 +11,7 @@ router.get("/register", async (req , res) => {
 
 router.post("/register", async (req, res) => {
     const {username , password , repeatPassword} = req.body;
-    const user = userService.register(username, password, repeatPassword);
+    await userService.register({username, password, repeatPassword});
     res.render("/users/login");
 });
 
