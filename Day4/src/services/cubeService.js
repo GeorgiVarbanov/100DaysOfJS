@@ -1,6 +1,4 @@
 const Cube = require("../models/Cube.js");
-const { search } = require("../router.js");
-
 
 exports.createCube = async (cubeData) => {
   const newCube = await Cube.create(cubeData);
