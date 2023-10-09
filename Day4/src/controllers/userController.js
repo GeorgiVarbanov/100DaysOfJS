@@ -1,16 +1,16 @@
 const router = require("express").Router();
 const userService = require("../services/userService.js");
 
+
 router.get("/login", async (req, res) => {
     res.render("user/login");
 });
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    await userService.login({ username, password });
+    const token = await userService.login(username, password);
 
-    res.cookie('auth');
-    
+    res.cookie('auth', token, {httpOnly: true});
     res.redirect("/");
 });
 
