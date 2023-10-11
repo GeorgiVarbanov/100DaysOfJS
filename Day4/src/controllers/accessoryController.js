@@ -8,7 +8,6 @@ router.get("/create", isAuth, (req, res) => {
 
 router.post("/create", isAuth, async (req, res) => {
     const { name, description, imageUrl} = req.body;
-    console.log({name,description,imageUrl});
     await accessoryService.createAccessory({name, description, imageUrl});
     res.redirect("/");
 });

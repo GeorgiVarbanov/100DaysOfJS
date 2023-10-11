@@ -42,8 +42,6 @@ router.get("/:cubeId/attach-accessory", isAuth,async (req, res) => {
   const cube = await cubeService.getById(cubeId).lean();
   const accessoryIds = cube.accessories ? cube.accessories.map((a) => a._id) : [];
 
-  console.log(accessoryIds);
-
   const accessories = await accessoryController.getWithoutOwned(accessoryIds);
 
   const hasAccessories = accessories.length > 0;
