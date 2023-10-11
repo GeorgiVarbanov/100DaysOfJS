@@ -11,7 +11,7 @@ exports.auth = async (req, res, next) => {
             req.user = decodedToken;
             res.locals.user = decodedToken;
             res.locals.isAuthenticated = true;
-            
+
             next();
         } catch (error) {
             console.log({ error });
@@ -23,6 +23,10 @@ exports.auth = async (req, res, next) => {
     }
 };
 
-exports.authorise = async (req,res,next) => {
+exports.isAuth = (req,res,next) => {
+    if (!req.user) {
+        return res.redirect("/users/login");
+    }
 
+    next();
 };

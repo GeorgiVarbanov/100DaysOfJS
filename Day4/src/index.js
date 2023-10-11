@@ -1,6 +1,6 @@
 const express = require("express");
 
-const expressConfig = require("./config/expressconfig");
+const expressConfig = require("./config/expressconfig.js");
 const handlebarsConfig = require("./config/hbsconfig");
 const dbConnect = require("./config/dbConfig.js");
 
