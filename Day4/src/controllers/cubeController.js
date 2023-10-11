@@ -27,7 +27,9 @@ router.get("/details/:cubeId", async (req, res) => {
   const hasAccessories =
     cube.accessories === undefined ? false : cube.accessories.length > 0;
 
-  res.render("cube/details", { cube, hasAccessories });
+  const isOwner = cube.owner?.toString() === req.user._id;
+
+  res.render("cube/details", { cube, hasAccessories, isOwner });
 });
 
 router.get("/:cubeId/attach-accessory", async (req, res) => {
