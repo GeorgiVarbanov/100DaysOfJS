@@ -27,7 +27,7 @@ router.get("/details/:cubeId", async (req, res) => {
   const hasAccessories =
     cube.accessories === undefined ? false : cube.accessories.length > 0;
 
-  if (req.user_id) {
+  if (req.user._id) {
     const isOwner = cube.owner?.toString() === req.user._id;
     res.render("cube/details", { cube, hasAccessories, isOwner });
   } else {
