@@ -20,7 +20,10 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-
+userSchema.path("username").validate(function (username) {
+    const user = mongoose.model("User").findOne({username});
+    return !!user;
+}, "Username already exists!");
 
 userSchema.pre("save", async function () {
     const hash = await bcrypt.hash(this.password, 10);
