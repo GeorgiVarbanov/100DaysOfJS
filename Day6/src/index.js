@@ -17,11 +17,8 @@ dbConnect()
 expressConfig(app);
 handlebarsConfig(app);
 
-app.get("/", (req, res) => {
-    res.render("home");
-});
-
-
 app.use(routes);
+
+
 
 app.listen(PORT, () => console.log(`Server is listening on port:${PORT}`));
