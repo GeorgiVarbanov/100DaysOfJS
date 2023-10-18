@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const routes = require("./router.js");
 
 
@@ -17,6 +18,7 @@ dbConnect()
 expressConfig(app);
 handlebarsConfig(app);
 
+app.use(cookieParser());
 app.use(routes);
 
 
