@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const routes = require("./router.js");
+const { auth } = require("./middlewares/authMiddleware.js");
 
 
 const expressConfig = require("./config/expressConfig.js");
@@ -12,14 +13,15 @@ const app = express();
 const { PORT } = require("./constants.js");
 
 dbConnect()
-.then(() => console.log(`Succesful connection to DB`))
-.catch(err => console.log(`Error while connecting to DB ${err}`));
+    .then(() => console.log(`Succesful connection to DB`))
+    .catch(err => console.log(`Error while connecting to DB ${err}`));
 
 expressConfig(app);
 handlebarsConfig(app);
 
 app.use(cookieParser());
 app.use(routes);
+app.use(auth);
 
 
 
