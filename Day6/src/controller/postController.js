@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const creatureService = require("../services/creatureService.js");
+const { isAuth } = require("../middlewares/authMiddleware.js");
 
 router.get("/all-posts", async (req, res) => {
     const creature = await creatureService.getAll();
@@ -10,7 +11,7 @@ router.get("/all-posts", async (req, res) => {
     res.render("post/all-posts", { creature, haveCreature });
 });
 
-router.get("/create", (req, res) => {
+router.get("/create", isAuth, (req, res) => {
     res.render("post/create");
 });
 
@@ -49,7 +50,7 @@ router.get("/:postId/creature/edit", async (req, res) => {
     res.render("post/edit", { creature });
 });
 
-router.post("/:postId/creature/edit", async (req, res) => {
+router.post("/:postId/creature/edit", isAuth, async (req, res) => {
     const { postId } = req.params;
     const {
         name,
@@ -67,7 +68,7 @@ router.post("/:postId/creature/edit", async (req, res) => {
     res.redirect(`/posts/${postId}/details`);
 });
 
-router.get("/:postId/creature/delete", async (req, res) => {
+router.get("/:postId/creature/delete", isAuth, async (req, res) => {
     const { postId } = req.params;
     await creatureService.delete(postId);
     res.redirect("/posts/all-posts");
