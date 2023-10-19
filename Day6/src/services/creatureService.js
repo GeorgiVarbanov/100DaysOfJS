@@ -1,6 +1,15 @@
 const Creature = require("../models/Creature.js");
 
-exports.createCreature = async (creatureData) => {
-    const newPosts = await Creature.create(creatureData);
-    return newPosts;
+exports.create = async (creatureData) => {
+    const newCreature = await Creature.create(creatureData);
+    return newCreature;
 };
+
+exports.getAll = async () => {
+    const creatures = await Creature.find().lean();
+    return creatures;
+}
+
+exports.getById = (id) => {
+    return Creature.findById(id).populate("owner");
+  };
