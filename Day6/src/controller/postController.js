@@ -30,12 +30,16 @@ router.post("/create", async (req, res) => {
     res.redirect("/posts/all-posts");
 });
 
-router.get("/:postId/creature", async (req, res) => {
+router.get("/:postId/details", async (req, res) => {
     const { postId } = req.params;
     const creature = await creatureService.getById(postId).lean();
     const ownerName = creature.owner.firstName + " " + creature.owner.lastName;
 
-    res.render("post/details", { creature, ownerName });
+    const { user } = req;
+    const { owner } = creature;
+    const isOwner = user?._id === owner._id.toString();
+
+    res.render("post/details", { creature, ownerName, isOwner });
 });
 
 router.get("/:postId/creature/edit", async (req, res) => {
@@ -60,7 +64,7 @@ router.post("/:postId/creature/edit", async (req, res) => {
 
     await creatureService.update(postId, payload);
 
-    res.redirect(`/posts/${postId}/creature`);
+    res.redirect(`/posts/${postId}/details`);
 });
 
 
