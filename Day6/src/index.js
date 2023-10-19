@@ -20,8 +20,8 @@ expressConfig(app);
 handlebarsConfig(app);
 
 app.use(cookieParser());
-app.use(routes);
 app.use(auth);
+app.use(routes);
 
 
 
