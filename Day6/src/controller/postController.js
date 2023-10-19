@@ -38,5 +38,13 @@ router.get("/:postId/creature", async (req, res) => {
     res.render("post/details", { creature, ownerName });
 });
 
+router.get("/:postId/creature/edit", async (req, res) => {
+    const { postId } = req.params;
+    const creature = await creatureService.getById(postId).lean();
+
+
+    res.render("post/edit", { creature });
+});
+
 
 module.exports = router;
