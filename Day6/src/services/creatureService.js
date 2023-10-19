@@ -13,3 +13,5 @@ exports.getAll = async () => {
 exports.getById = (id) => {
     return Creature.findById(id).populate("owner");
   };
+
+exports.update = async (id, cubeData) => Creature.findByIdAndUpdate(id, cubeData);

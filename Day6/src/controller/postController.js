@@ -42,8 +42,25 @@ router.get("/:postId/creature/edit", async (req, res) => {
     const { postId } = req.params;
     const creature = await creatureService.getById(postId).lean();
 
-
     res.render("post/edit", { creature });
+});
+
+router.post("/:postId/creature/edit", async (req, res) => {
+    const { postId } = req.params;
+    const {
+        name,
+        species,
+        skinColor,
+        eyeColor,
+        imageUrl,
+        description,
+    } = req.body;
+
+    const payload = { name, species, skinColor, eyeColor, imageUrl, description };
+
+    await creatureService.update(postId, payload);
+
+    res.redirect(`/posts/${postId}/creature`);
 });
 
 
