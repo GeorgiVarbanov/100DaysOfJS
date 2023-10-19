@@ -15,3 +15,5 @@ exports.getById = (id) => {
   };
 
 exports.update = async (id, cubeData) => Creature.findByIdAndUpdate(id, cubeData);
+
+exports.delete = async (id) => Creature.findByIdAndDelete(id);

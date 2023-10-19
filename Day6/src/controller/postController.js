@@ -67,5 +67,11 @@ router.post("/:postId/creature/edit", async (req, res) => {
     res.redirect(`/posts/${postId}/details`);
 });
 
+router.get("/:postId/creature/delete", async (req, res) => {
+    const { postId } = req.params;
+    await creatureService.delete(postId);
+    res.redirect("/posts/all-posts");
+});
+
 
 module.exports = router;
